@@ -20735,6 +20735,34 @@ export class SlitherWing extends Pokemon {
   skill = Ability.SKITTER_SMACK
 }
 
+export class God extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL, Synergy.FLYING, Synergy.FIELD, Synergy.DARK, Synergy.GROUND,
+    Synergy.PSYCHIC, Synergy.GRASS, Synergy.BUG, Synergy.WATER, Synergy.AQUATIC,
+    Synergy.POISON, Synergy.FAIRY, Synergy.FIGHTING, Synergy.FIRE, Synergy.GHOST,
+    Synergy.ROCK, Synergy.MONSTER, Synergy.AMORPHOUS, Synergy.WILD, Synergy.SOUND,
+    Synergy.FLORA, Synergy.STEEL, Synergy.ELECTRIC, Synergy.ICE, Synergy.BABY,
+    Synergy.HUMAN, Synergy.DRAGON, Synergy.LIGHT, Synergy.GOURMET, Synergy.FOSSIL,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.PICHU
+  hp = 1
+  atk = 1
+  speed = 1
+  def = 1
+  speDef = 1
+  maxPP = 255
+  range = 1
+  critChance = 1
+  critPower = 1
+  ap = 1
+  luck = 1
+  skill = Ability.NUZZLE
+  passive = Passive.GOD
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21930,7 +21958,8 @@ export const PokemonClasses: Record<
   [Pkm.KOMALA]: Komala,
   [Pkm.TAROUNTULA]: Tarountula,
   [Pkm.SPIDOPS]: Spidops,
-  [Pkm.SLITHER_WING]: SlitherWing
+  [Pkm.SLITHER_WING]: SlitherWing,
+  [Pkm.GOD]: God
 }
 
 // declare all the classes in colyseus schema TypeRegistry

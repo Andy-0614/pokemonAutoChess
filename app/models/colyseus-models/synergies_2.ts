@@ -10,13 +10,6 @@ import { isOnBench } from "../../utils/board"
 import { schemaValues } from "../../utils/schemas"
 import { PVEStages } from "../pve-stages"
 
-// 擴充 TypeScript 接口，允許我們在 pkm 物件上暫存當前的 GOD 隨機結果
-declare module "../../types" {
-  interface IPokemon {
-    godSynergiesCache?: Map<Synergy, number>;
-  }
-}
-
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
     super()
@@ -77,73 +70,6 @@ export default class Synergies extends MapSchema<number, Synergy> {
   }
 }
 
-/**
- * 內部專用：獨立的 GOD 隨機刷新邏輯
- */
-function rollGodSynergies(): Map<Synergy, number> {
-  const godSynergies = new Map<Synergy, number>()
-  const tier2Limits: Record<Synergy, number> = {
-    [Synergy.NORMAL]:     6,
-    [Synergy.FLYING]:     4,
-    [Synergy.FIELD]:      4,
-    [Synergy.DARK]:       5,
-    [Synergy.GROUND]:     6,
-    [Synergy.PSYCHIC]:    4,
-    [Synergy.GRASS]:      6,
-    [Synergy.BUG]:        0, // BUG 限制直接設為 0
-    [Synergy.WATER]:      6,
-    [Synergy.AQUATIC]:    4,
-    [Synergy.POISON]:     5,
-    [Synergy.FAIRY]:      4,
-    [Synergy.FIGHTING]:   6,
-    [Synergy.FIRE]:       6,
-    [Synergy.GHOST]:      4,
-    [Synergy.ROCK]:       4,
-    [Synergy.MONSTER]:    6,
-    [Synergy.AMORPHOUS]:  5,
-    [Synergy.WILD]:       6,
-    [Synergy.SOUND]:      4,
-    [Synergy.FLORA]:      5,
-    [Synergy.STEEL]:      4,
-    [Synergy.ELECTRIC]:   4,
-    [Synergy.ICE]:        6,
-    [Synergy.BABY]:       3,
-    [Synergy.HUMAN]:      4,
-    [Synergy.DRAGON]:     4,
-    [Synergy.LIGHT]:      4,
-    [Synergy.GOURMET]:    3,
-    [Synergy.FOSSIL]:     4,
-    [Synergy.ARTIFICIAL]: 4
-  }
-
-  const use = Math.floor((31 * 10) / 5)
-  let currentSum = 0
-
-  const allSynergies = Object.keys(tier2Limits) as unknown as Synergy[]
-  const shuffledSynergies = allSynergies.sort(() => Math.random() - 0.5)
-
-  shuffledSynergies.forEach((synergy) => {
-    if (synergy === Synergy.BUG) {
-      godSynergies.set(synergy, 0)
-      return
-    }
-
-    const remaining = use - currentSum
-    const tier2Max = tier2Limits[synergy] || 4
-    const maxAllowed = Math.min(tier2Max, remaining)
-
-    if (maxAllowed > 0) {
-      const rolled = Math.floor(Math.random() * (maxAllowed + 1))
-      godSynergies.set(synergy, rolled)
-      currentSum += rolled
-    } else {
-      godSynergies.set(synergy, 0)
-    }
-  })
-
-  return godSynergies
-}
-
 export function computeSynergies(
   board: IPokemon[],
   bonusSynergies?: Map<Synergy, number>,
@@ -180,27 +106,70 @@ export function computeSynergies(
     })
   })
 
-  // GOD passive 改良邏輯：放上場時才隨機重新整理
+  // GOD passive
   board.forEach((pkm: IPokemon) => {
-    if (pkm.passive === Passive.GOD) {
-      if (pkm.positionY !== 0) {
-        // 情況 A：寶可夢在場上（放上去狀態）
-        // 如果還沒有快取，代表是「剛被放上去」的那一刻，觸發隨機刷新
-        if (!pkm.godSynergiesCache) {
-          pkm.godSynergiesCache = rollGodSynergies()
-        }
-        
-        // 累加這隻寶可夢身上固定的隨機結果（後續對戰或重複計算時，都不會再走 roll 邏輯）
-        pkm.godSynergiesCache.forEach((value, synergy) => {
-          synergies.set(synergy, (synergies.get(synergy) ?? 0) + value)
-        })
-      } else {
-        // 情況 B：寶可夢回到了備戰區 (positionY === 0)
-        // 清空快取，這樣下次再次「放上去」時，就能重新觸發刷新
-        pkm.godSynergiesCache = undefined
+  if (pkm.positionY !== 0 && pkm.passive === Passive.GOD) {
+    const tier2Limits: Record<Synergy, number> = {
+      [Synergy.NORMAL]:     6,
+      [Synergy.FLYING]:     4,
+      [Synergy.FIELD]:      4,
+      [Synergy.DARK]:       5,
+      [Synergy.GROUND]:     6,
+      [Synergy.PSYCHIC]:    4,
+      [Synergy.GRASS]:      6,
+      [Synergy.BUG]:        0, // BUG 限制直接設為 0
+      [Synergy.WATER]:      6,
+      [Synergy.AQUATIC]:    4,
+      [Synergy.POISON]:     5,
+      [Synergy.FAIRY]:      4,
+      [Synergy.FIGHTING]:   6,
+      [Synergy.FIRE]:       6,
+      [Synergy.GHOST]:      4,
+      [Synergy.ROCK]:       4,
+      [Synergy.MONSTER]:    6,
+      [Synergy.AMORPHOUS]:  5,
+      [Synergy.WILD]:       6,
+      [Synergy.SOUND]:      4,
+      [Synergy.FLORA]:      5,
+      [Synergy.STEEL]:      4,
+      [Synergy.ELECTRIC]:   4,
+      [Synergy.ICE]:        6,
+      [Synergy.BABY]:       3,
+      [Synergy.HUMAN]:      4,
+      [Synergy.DRAGON]:     4,
+      [Synergy.LIGHT]:      4,
+      [Synergy.GOURMET]:    3,
+      [Synergy.FOSSIL]:     4,
+      [Synergy.ARTIFICIAL]: 4
+    };
+
+    const use = Math.floor((31 * 10) / 5);
+    let currentSum = 0;
+
+    const allSynergies = Object.keys(tier2Limits) as unknown as Synergy[];
+    const shuffledSynergies = allSynergies.sort(() => Math.random() - 0.5);
+
+    shuffledSynergies.forEach(synergy => {
+      if (synergy === Synergy.BUG) {
+        synergies.set(synergy, 0);
+        return;
       }
-    }
-  })
+
+      const remaining = use - currentSum; 
+      const tier2Max = tier2Limits[synergy] || 4; 
+
+      const maxAllowed = Math.min(tier2Max, remaining);
+
+      if (maxAllowed > 0) {
+        const rolled = Math.floor(Math.random() * (maxAllowed + 1));
+        synergies.set(synergy, rolled);
+        currentSum += rolled; 
+      } else {
+        synergies.set(synergy, 0);
+      }
+    });
+  }
+});
 
   function applyDragonDoubleTypes() {
     const dragonDoubleTypes = new Map<string, Set<Synergy>>()

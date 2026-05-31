@@ -123,5 +123,6 @@ export const BuyPrices = {
   DITTO: 5,
   FALINKS_TROOPER: 3,
   MELTAN: 0,
-  UNOWN: 1
+  UNOWN: 1,
+  GOD: 10
 }

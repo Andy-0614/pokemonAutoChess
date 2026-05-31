@@ -1186,7 +1186,8 @@ export enum Pkm {
   ZWEILOUS = "ZWEILOUS",
   ZYGARDE_10 = "ZYGARDE_10",
   ZYGARDE_50 = "ZYGARDE_50",
-  ZYGARDE_100 = "ZYGARDE_100"
+  ZYGARDE_100 = "ZYGARDE_100",
+  GOD = "GOD"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2466,7 +2467,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
   [Pkm.ARCHALUDON]: "1018",
   [Pkm.HYDRAPPLE]: "1019",
-  [Pkm.PECHARUNT]: "1025"
+  [Pkm.PECHARUNT]: "1025",
+  [Pkm.GOD]: "0778-0001"
 }
 
 export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
@@ -3660,7 +3662,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KOMALA]: Pkm.KOMALA,
   [Pkm.TAROUNTULA]: Pkm.TAROUNTULA,
   [Pkm.SPIDOPS]: Pkm.TAROUNTULA,
-  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING
+  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING,
+  [Pkm.GOD]: Pkm.GOD
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

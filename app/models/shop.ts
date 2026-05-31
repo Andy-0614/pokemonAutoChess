@@ -171,6 +171,8 @@ export function getBuyPrice(
     price = BuyPrices.MELTAN
   } else if (Unowns.includes(name)) {
     price = BuyPrices.UNOWN
+  } else if (name === Pkm.GOD) {
+    price = BuyPrices.GOD
   } else {
     price = RarityCost[getPokemonData(name).rarity]
   }

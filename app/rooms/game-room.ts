@@ -1134,7 +1134,31 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (!player) return false
     let hasEvolved = false
 
+    // Check if GOD(s) should be sold instead of evolving
+    const godPokemon = [...player.board.values()].filter(
+      (p) => p.passive === Passive.GOD && p.hasEvolution
+    )
+    if (godPokemon.length > 0) {
+      const handler = EvolutionManager.getHandler(godPokemon[0].evolutionRule)
+      if (handler.canEvolve(godPokemon[0], player)) {
+        // Sell ALL GOD copies
+        godPokemon.forEach((god) => {
+          player.board.delete(god.id)
+          this.state.shop.releasePokemon(god.name, player, this.state)
+          const sellPrice = getSellPrice(god, this.state.specialGameRule)
+          player.addMoney(sellPrice, false, null)
+          god.items.forEach((it) => {
+            player.items.push(it)
+          })
+          god.afterSell(player)
+        })
+        player.updateSynergies()
+        hasEvolved = true
+      }
+    }
+
     player.board.forEach((pokemon) => {
+      if (pokemon.passive === Passive.GOD) return // already handled above
       if (
         pokemon.hasEvolution &&
         pokemon.evolutionRule.type === EvolutionRuleType.COUNT

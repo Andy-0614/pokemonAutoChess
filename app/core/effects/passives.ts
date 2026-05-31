@@ -7,6 +7,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getSellPrice } from "../../models/shop"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -27,7 +28,10 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
-import { isOnBench } from "../../utils/board"
+import {
+  getFirstAvailablePositionInBench,
+  isOnBench
+} from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
@@ -1680,6 +1684,24 @@ export const PassiveEffects: Partial<
         pokemon.range = 1
         pokemon.skill = Ability.DEFEND_ORDER
       }
+    })
+  ],
+
+  [Passive.GOD]: [
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      // Sell GOD instead of equipping the item
+      player.board.delete(pokemon.id)
+      room.state.shop.releasePokemon(pokemon.name, player, room.state)
+      const sellPrice = getSellPrice(pokemon, room.state.specialGameRule)
+      player.addMoney(sellPrice, false, null)
+      pokemon.items.forEach((it) => {
+        player.items.push(it)
+      })
+      player.items.push(item)
+      player.updateSynergies()
+      player.boardSize = room.getTeamSize(player.board)
+      pokemon.afterSell(player)
+      return false // cancel item equip
     })
   ]
 }

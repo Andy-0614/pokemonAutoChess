@@ -176,6 +176,19 @@ export class OnBuyPokemonCommand extends Command<
     player.board.set(pokemon.id, pokemon)
     pokemon.onAcquired(player)
 
+    if (pokemon.passive === Passive.GOD) {
+      // Spawn 2 Dittos on the bench when GOD is purchased
+      for (let i = 0; i < 2; i++) {
+        const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
+        const dittoX = getFirstAvailablePositionInBench(player.board)
+        if (dittoX !== null) {
+          ditto.positionX = dittoX
+          ditto.positionY = 0
+          player.board.set(ditto.id, ditto)
+        }
+      }
+    }
+
     if (
       pokemon.passive === Passive.UNOWN &&
       (player.effects.has(EffectEnum.TRANSCENDENCE) ||
