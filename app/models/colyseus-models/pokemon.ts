@@ -179,6 +179,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get teamSizeCost(): number {
+    return this.doesCountForTeamSize ? 1 : 0
+  }
+
   onItemGiven(item: Item, player: Player) {
     // called after giving an item to the mon
   }
@@ -20748,19 +20752,23 @@ export class God extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.PICHU
-  hp = 1
+  hp = 50
   atk = 1
   speed = 1
   def = 1
   speDef = 1
-  maxPP = 255
+  maxPP = 25
   range = 1
   critChance = 1
   critPower = 1
   ap = 1
   luck = 1
-  skill = Ability.NUZZLE
+  skill = Ability.TELEPORT
   passive = Passive.GOD
+
+  get teamSizeCost(): number {
+    return 2
+  }
 }
 
 export const PokemonClasses: Record<

@@ -387,14 +387,18 @@ export class OnDragDropPokemonCommand extends Command<
         } else if (this.state.phase == GamePhaseState.PICK) {
           // On pick, allow to drop on / from board
           const teamSize = this.room.getTeamSize(player.board)
-          const isBoardFull =
-            teamSize >=
-            getMaxTeamSize(
-              player.experienceManager.level,
-              this.room.state.specialGameRule
-            )
+          const maxSize = getMaxTeamSize(
+            player.experienceManager.level,
+            this.room.state.specialGameRule
+          )
+          const isBoardFull = teamSize >= maxSize
           const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
           const target = player.getPokemonAt(x, y)
+          const netCostAfterSwap =
+            (pokemon.doesCountForTeamSize ? pokemon.teamSizeCost : 0) -
+            (target?.doesCountForTeamSize ? target.teamSizeCost : 0)
+          const wouldExceedTeamSize =
+            dropFromBench && teamSize + netCostAfterSwap > maxSize
 
           if (dropOnBench) {
             if (
@@ -413,17 +417,7 @@ export class OnDragDropPokemonCommand extends Command<
           } else if (
             pokemon.canBePlaced &&
             (!target || target.canBeBenched) &&
-            !(
-              dropFromBench &&
-              dropToEmptyPlace &&
-              isBoardFull &&
-              pokemon.doesCountForTeamSize
-            ) &&
-            !(
-              dropFromBench &&
-              isBoardFull &&
-              target?.doesCountForTeamSize === false
-            )
+            !wouldExceedTeamSize
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
             this.swapPokemonPositions(player, pokemon, x, y)
@@ -502,12 +496,10 @@ export class OnSwitchBenchAndBoardCommand extends Command<
     if (pokemon.positionY === 0) {
       // pokemon is on bench, switch to board
       const teamSize = this.room.getTeamSize(player.board)
-      const isBoardFull =
-        teamSize >=
-        getMaxTeamSize(
-          player.experienceManager.level,
-          this.room.state.specialGameRule
-        )
+      const maxSize = getMaxTeamSize(
+        player.experienceManager.level,
+        this.room.state.specialGameRule
+      )
       const destination = getFirstAvailablePositionOnBoard(
         player.board,
         pokemon.range
@@ -515,7 +507,10 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       if (
         pokemon.canBePlaced &&
         destination &&
-        !(isBoardFull && pokemon.doesCountForTeamSize)
+        !(
+          pokemon.doesCountForTeamSize &&
+          teamSize + pokemon.teamSizeCost > maxSize
+        )
       ) {
         const [x, y] = destination
         const oldX = pokemon.positionX

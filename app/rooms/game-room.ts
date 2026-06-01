@@ -1209,8 +1209,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     let size = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY != 0 && pokemon.doesCountForTeamSize) {
-        size++
+      if (pokemon.positionY != 0) {
+        size += pokemon.teamSizeCost
       }
     })
 

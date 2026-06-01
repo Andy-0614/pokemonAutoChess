@@ -112,7 +112,7 @@ function rollGodSynergies(): Map<Synergy, number> {
     [Synergy.ARTIFICIAL]: 4
   }
 
-  const use = Math.floor(15)
+  const use = 17
   let currentSum = 0
 
   const allSynergies = Object.keys(tier2Limits) as unknown as Synergy[]
