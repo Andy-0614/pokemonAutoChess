@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "Commun",
 		"UNCOMMON": "Peu Commun",
@@ -3331,7 +3331,8 @@
 		"AVALUGG": "Peut porter jusqu'à 4 $t(pkm.BERGMITE) sur son dos, récupérés depuis votre banc au début du combat.",
 		"EISCUE_NOICE": "Lorsqu'il démarre un combat sous la SNOW, il gagne sa forme Tête de Gel et 100 SHIELD. Lorsqu'il subit ou inflige FREEZE, il regagne sa forme Tête de Gel et gagne 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Lorsqu'il déclenche sa capacité, son SHIELD actuel est converti en SPECIAL supplémentaires. Lorsque le SHIELD est brisé ou après avoir lancé sa capacité, il retrouve sa forme Tête Dégel.",
-		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé."
+		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé.",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "Attaque",

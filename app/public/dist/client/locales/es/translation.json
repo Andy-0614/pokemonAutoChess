@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "Común",
 		"UNCOMMON": "Poco Común",
@@ -3130,7 +3130,8 @@
 		"SLOWPOKE": "Evolucionará a $t(pkm.SLOWBRO) o a $t(pkm.SLOWKING) dependiendo de la sinergia predominante entre WATER y PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Evolucionará a $t(pkm.GALARIAN_SLOWBRO) o a $t(pkm.GALARIAN_SLOWKING) dependiendo de la sinergia predominante entre POISON y PSYCHIC.",
 		"BIVALVE": "Bivalva",
-		"WALL_OF_STONE": ""
+		"WALL_OF_STONE": "",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "Ataque",

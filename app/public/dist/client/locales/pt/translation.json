@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "Comum",
 		"UNCOMMON": "Incomum",
@@ -3320,7 +3320,8 @@
 		"SPEWPA": "Os Pokémon chocados evoluem automaticamente após 5 estágios. A evolução depende da sua sinergia dominante no tabuleiro entre os tipos: SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "Ao voar para longe, solta brasas no chão.\nBOARD_EFFECT: as brasas causam 10 de SPECIAL por segundo e aplicam BURN em Pokémons que não sejam do tipo FLYING ou FIRE que pisarem nelas.",
 		"FINIZEN": "Transforma-se na Forma Heroica Palafin após 5 aliados serem derrotados (sem contar os Pokémon que surgem no mapa), ou se este Pokémon for o último sobrevivente. Recupera todo o HP quando isso acontece.",
-		"COMMANDER": "Tatsugiri não pode carregar itens. No início da luta, um Dondozo ADJACENT com um espaço livre para item engole Tatsugiri. Tatsugiri fornece atributos com base em sua forma:\nForma Enrolado: +8 de ATK\nForma Pendente: +8 de DEF\nForma Esticado: +25 de SPEED"
+		"COMMANDER": "Tatsugiri não pode carregar itens. No início da luta, um Dondozo ADJACENT com um espaço livre para item engole Tatsugiri. Tatsugiri fornece atributos com base em sua forma:\nForma Enrolado: +8 de ATK\nForma Pendente: +8 de DEF\nForma Esticado: +25 de SPEED",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "Ataque",

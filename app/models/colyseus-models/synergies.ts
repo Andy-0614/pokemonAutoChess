@@ -10,12 +10,8 @@ import { isOnBench } from "../../utils/board"
 import { schemaValues } from "../../utils/schemas"
 import { PVEStages } from "../pve-stages"
 
-// 擴充 TypeScript 接口，允許我們在 pkm 物件上暫存當前的 GOD 隨機結果
-declare module "../../types" {
-  interface IPokemon {
-    godSynergiesCache?: Map<Synergy, number>;
-  }
-}
+// 用 WeakMap 暫存每隻 GOD 寶可夢的隨機共鳴結果，不污染 IPokemon 型別
+const godSynergiesCacheMap = new WeakMap<object, Map<Synergy, number>>()
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
@@ -186,18 +182,18 @@ export function computeSynergies(
       if (pkm.positionY !== 0) {
         // 情況 A：寶可夢在場上（放上去狀態）
         // 如果還沒有快取，代表是「剛被放上去」的那一刻，觸發隨機刷新
-        if (!pkm.godSynergiesCache) {
-          pkm.godSynergiesCache = rollGodSynergies()
+        if (!godSynergiesCacheMap.has(pkm)) {
+          godSynergiesCacheMap.set(pkm, rollGodSynergies())
         }
-        
+
         // 累加這隻寶可夢身上固定的隨機結果（後續對戰或重複計算時，都不會再走 roll 邏輯）
-        pkm.godSynergiesCache.forEach((value, synergy) => {
+        godSynergiesCacheMap.get(pkm)!.forEach((value, synergy) => {
           synergies.set(synergy, (synergies.get(synergy) ?? 0) + value)
         })
       } else {
         // 情況 B：寶可夢回到了備戰區 (positionY === 0)
         // 清空快取，這樣下次再次「放上去」時，就能重新觸發刷新
-        pkm.godSynergiesCache = undefined
+        godSynergiesCacheMap.delete(pkm)
       }
     }
   })

@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "Comune",
 		"UNCOMMON": "Non Comune",
@@ -3229,7 +3229,8 @@
 		"TADBULB": "Se inizia il combattimento esposto alla LIGHT o dopo aver ricevuto 50 o più danni, si supercarica e infligge 10 SPECIAL ai nemici ADJACENT, spingendoli all'indietro (questa attivazione ha 3 secondi di cooldown). La prima supercarica gli dà 20 SPEED, 30 di SHIELD e il ELECTRIC_FIELD.",
 		"PINCURCHIN": "Quando colpito da SPECIAL, guadagna il ELECTRIC_FIELD. Se sotto l'effetto di ELECTRIC_FIELD, gli attacchi ricevuti da nemici ADJACENT causano PARALYSIS all'aggressore per 2 secondi.",
 		"STAMINA": "Ogni 10 colpi ricevuti, ottieni [20,SP] di SHIELD",
-		"SPEWPA": "I Pokémon schiusi si evolvono automaticamente dopo 5 livelli. Il tipo dell'evoluzione di Spewpa dipende dalla sinergia dominante nel tuo team tra SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL"
+		"SPEWPA": "I Pokémon schiusi si evolvono automaticamente dopo 5 livelli. Il tipo dell'evoluzione di Spewpa dipende dalla sinergia dominante nel tuo team tra SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "Attacco",

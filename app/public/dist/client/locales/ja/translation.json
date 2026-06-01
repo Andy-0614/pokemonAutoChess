@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "コモン",
 		"UNCOMMON": "アンコモン",
@@ -2378,7 +2378,8 @@
 		"UNOWN": "アンノーンはアイテムを保持できず、能力を発動すると消滅する",
 		"GLISCOR": "ポケモンが「どく」の場合、ダメージを受ける代わりにHPが回復する",
 		"GRIM_NEIGH": "ポケモンが敵を倒すと、恐ろしい鳴き声を発し、APが30増加します",
-		"SHAYMIN": "シェイミはGRACIDEA_FLOWERを探しています"
+		"SHAYMIN": "シェイミはGRACIDEA_FLOWERを探しています",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "こうげき",

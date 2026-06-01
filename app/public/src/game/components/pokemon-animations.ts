@@ -8063,5 +8063,10 @@ export const PokemonAnimations: {
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.GOD]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Hop
   }
 }

@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "често срещани",
 		"UNCOMMON": "Нечести",
@@ -1347,7 +1347,8 @@
 		"UNOWN": "Unown не може да задържа предмети и да изчезва след прилагане на способността им",
 		"GLISCOR": "Ако покемонът е POISONNED, той ще спечели HP, вместо да понася щети",
 		"GRIM_NEIGH": "Когато покемонът нокаутира враг, той издава ужасяващ цвилен звук, който увеличава AP с 30",
-		"SHAYMIN": "Shaymin търси GRACIDEA_FLOWER"
+		"SHAYMIN": "Shaymin търси GRACIDEA_FLOWER",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "Атака",

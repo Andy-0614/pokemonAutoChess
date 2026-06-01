@@ -1,4 +1,4 @@
-{
+﻿{
 	"rarity": {
 		"COMMON": "커먼",
 		"UNCOMMON": "언커먼",
@@ -3340,7 +3340,8 @@
 		"SEASONAL": "계절 포켓몬은 현재 계절(북반구 기준)에 따라 모습과 타입을 바꾼다.",
 		"SLOWPOKE": "WATER 와 PSYCHIC 중 주력 시너지에 따라 $t(pkm.SLOWBRO) 또는 $t(pkm.SLOWKING)으로 진화한다.",
 		"GALARIAN_SLOWPOKE": "POISON 과 PSYCHIC 중 주력 시너지에 따라 $t(pkm.GALARIAN_SLOWBRO) 또는 $t(pkm.GALARIAN_SLOWKING)으로 진화한다.",
-		"ROTOM": "로토무는 ROTOM_CATALOG에서 빙의할 새로운 가전제품을 선택하여 폼을 바꿀 수 있다."
+		"ROTOM": "로토무는 ROTOM_CATALOG에서 빙의할 새로운 가전제품을 선택하여 폼을 바꿀 수 있다.",
+		"GOD": "Randomly provides up to 15 synergy points across all synergies when placed on the board."
 	},
 	"stat": {
 		"ATK": "공격력",
