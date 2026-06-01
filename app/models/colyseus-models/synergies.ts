@@ -90,7 +90,7 @@ function rollGodSynergies(): Map<Synergy, number> {
     [Synergy.GROUND]:     6,
     [Synergy.PSYCHIC]:    4,
     [Synergy.GRASS]:      6,
-    [Synergy.BUG]:        0, // BUG 限制直接設為 0
+    [Synergy.BUG]:        6, 
     [Synergy.WATER]:      6,
     [Synergy.AQUATIC]:    4,
     [Synergy.POISON]:     5,
