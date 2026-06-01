@@ -500,8 +500,8 @@ export default class GameScene extends Scene {
           }
         })
       }
-      if (this.board && !pointer.rightButtonDown()) {
-        this.board.closeTooltips()
+      if (!pointer.rightButtonDown()) {
+        this.closeTooltips()
       }
     })
 

@@ -54,6 +54,7 @@ export default function SynergyComponent(props: {
       place="right-start"
       delayShow={100}
       delayHide={0}
+      globalCloseEvents={{ clickOutsideAnchor: true }}
     >
       <SynergyDetailComponent type={props.type} value={props.value} />
     </Tooltip>

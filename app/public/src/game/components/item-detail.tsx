@@ -133,6 +133,7 @@ export function ItemDetailTooltipContent({
       <Tooltip
         id="item-detail-recipes-tooltip"
         className="custom-theme-tooltip item-detail-tooltip"
+        globalCloseEvents={{ clickOutsideAnchor: true }}
         render={({ content }) => (
           <ItemDetailTooltipContent
             item={content as Item}
@@ -149,6 +150,7 @@ export function ItemDetailTooltip() {
     <Tooltip
       id="item-detail-tooltip"
       className="custom-theme-tooltip item-detail-tooltip"
+      globalCloseEvents={{ clickOutsideAnchor: true }}
       render={({ content }) => (
         <ItemDetailTooltipContent item={content as Item} />
       )}

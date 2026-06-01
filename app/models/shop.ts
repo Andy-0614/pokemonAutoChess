@@ -60,6 +60,7 @@ import {
   Unowns
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
+import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
@@ -413,7 +414,9 @@ export default class Shop {
       function filterCandidates(proposition: PkmProposition): boolean {
         const pkm: Pkm =
           proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
-        const { types, regional } = getPokemonData(pkm)
+        const { types, regional, passive } = getPokemonData(pkm)
+
+        if (passive === Passive.GOD) return false
 
         const hasSynergyWanted =
           synergyWanted === undefined || types.includes(synergyWanted)

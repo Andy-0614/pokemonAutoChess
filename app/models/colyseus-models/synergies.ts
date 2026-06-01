@@ -116,7 +116,7 @@ function rollGodSynergies(): Map<Synergy, number> {
     [Synergy.ARTIFICIAL]: 4
   }
 
-  const use = Math.floor((31 * 10) / 5)
+  const use = Math.floor(15)
   let currentSum = 0
 
   const allSynergies = Object.keys(tier2Limits) as unknown as Synergy[]
@@ -163,7 +163,7 @@ export function computeSynergies(
     }
 
     addSynergiesGivenByItems(pkm)
-    if (pkm.positionY != 0) {
+    if (pkm.positionY != 0 && pkm.passive !== Passive.GOD) {
       const family =
         specialGameRule === SpecialGameRule.FAMILY_OUTING
           ? `pkm${index}`

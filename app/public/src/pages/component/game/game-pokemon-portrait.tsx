@@ -179,6 +179,7 @@ export default function GamePokemonPortrait(props: {
         id={`tooltip-${props.origin}-${props.index}`}
         className="custom-theme-tooltip game-pokemon-detail-tooltip"
         place="top"
+        globalCloseEvents={{ clickOutsideAnchor: true }}
       >
         <GamePokemonDetail
           key={pokemonInPortrait.id}
